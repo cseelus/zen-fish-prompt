@@ -23,17 +23,8 @@ function fish_prompt
   set -l turquoise (set_color green)
   set -l cobalt (set_color blue)
   set -l purple (set_color cyan)
-  set -l wine (set_color red)
   set -l cloud (set_color white)
   set -l sap (set_color yellow)
-  # When some day terminals get real colors …
-  # set -l darkgrey (set_color 535557)
-  # set -l turquoise (set_color 9bfda6)
-  # set -l cobalt (set_color 406ddf)
-  # set -l purple (set_color 7a99ff)
-  # set -l wine (set_color a84d70)
-  # set -l cloud (set_color e6e7e7)
-  # set -l sap (set_color fde9a2)
 
   set -l cwd $cobalt(pwd | sed "s:^$HOME:~:")
 
@@ -69,14 +60,14 @@ function fish_prompt
 
   # Terminate with a nice prompt char
   echo -e ''
-  echo -e -n -s '> ' $cloud
+  echo -e -n -s '⟩ ' $cloud
 end
 
 # set fish_color_autosuggestion black
 set fish_color_normal white
 set fish_color_command green
 set fish_color_param magenta
-# fish_color_quote, the color for quoted blocks of text
+set fish_color_quote purple
 # fish_color_redirection, the color for IO redirections
 # fish_color_end, the color for process separators like ';' and '&'
 # fish_color_error, the color used to highlight potential errors
