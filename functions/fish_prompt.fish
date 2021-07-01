@@ -40,21 +40,30 @@ function _remote_hostname
 end
 
 function _git_branch_name
-  echo (command git symbolic-ref HEAD ^/dev/null | sed -e 's|^refs/heads/||')
+  set --local is_git_repository (command git rev-parse --is-inside-work-tree 2>/dev/null)
+
+  if test -n "$is_git_repository"
+    echo (command git symbolic-ref --short HEAD 2>/dev/null;
+        or command git name-rev --name-only HEAD 2>/dev/null)
+  end
 end
 
 function _git_status_symbol
-  set -l git_status (git status --porcelain ^/dev/null)
+  set --local is_git_repository (command git rev-parse --is-inside-work-tree 2>/dev/null)
 
-  if test -n "$git_status"
-    # Is there anyway to preserve newlines so we can reuse $git_status?
-    if git status --porcelain ^/dev/null | grep '^.[^ ]' >/dev/null
-      echo ' ±' # dirty
+  if test -n "$is_git_repository"
+    set -l git_status (git status --porcelain ^/dev/null)
+
+    if test -n "$git_status"
+      # Is there anyway to preserve newlines so we can reuse $git_status?
+      if git status --porcelain ^/dev/null | grep '^.[^ ]' >/dev/null
+        echo ' ±' # dirty
+      else
+        echo ' ✓' # all staged
+      end
     else
-      echo ' ✓' # all staged
+      echo    '' # clean
     end
-  else
-    echo    '' # clean
   end
 end
 
