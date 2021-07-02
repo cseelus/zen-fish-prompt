@@ -67,3 +67,24 @@ function _git_status_symbol
   end
 end
 
+# Change VIM mode indicator
+function fish_mode_prompt
+  switch $fish_bind_mode
+    case default
+      set_color --bold blue
+      echo 'ɴᴏʀᴍᴀʟ'
+    case insert
+      set_color --bold green
+      echo ''
+    case replace_one
+      set_color --bold red
+      echo 'ʀᴇᴘʟᴀᴄᴇ'
+    case visual
+      set_color --bold yellow
+      echo 'ᴠɪsᴜᴀʟ'
+    case '*'
+      set_color --bold red
+      echo 'ˀˀˀ'
+  end
+  set_color normal
+end
