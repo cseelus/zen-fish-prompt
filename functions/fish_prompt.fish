@@ -75,7 +75,7 @@ function fish_mode_prompt
       echo 'ɴᴏʀᴍᴀʟ'
     case insert
       set_color --bold green
-      echo ''
+      echo ' '
     case replace_one
       set_color --bold red
       echo 'ʀᴇᴘʟᴀᴄᴇ'
